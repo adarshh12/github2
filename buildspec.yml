@@ -1,0 +1,27 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "eu-central-1"
+    ECR_URI: "084828579234.dkr.ecr.amazonaws.com"
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - echo "Building the Docker image..."
+      - docker build -t flask-ml-app .
+  post_build:
+    commands:
+      - echo "Pushing Docker image to Amazon ECR..."
+      - $(aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_URI)
+      - docker tag flask-ml-app:latest $ECR_URI/flask-ml-app:latest
+      - docker push $ECR_URI/flask-ml-app:latest
+artifacts:
+  files:
+    - '**/*'
