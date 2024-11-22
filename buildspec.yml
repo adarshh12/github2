@@ -10,11 +10,12 @@ phases:
     runtime-versions:
       python: 3.x
     commands:
-      - echo "Upgrading pip and setuptools..."
+      - echo "Upgrading pip, setuptools, and reinstalling six..."
       - pip install --upgrade pip setuptools
-      - echo "Installing dependencies..."
       - pip install --force-reinstall six
-      - pip install -r requirements.txt
+      - pip cache purge  # Clear pip cache to ensure clean installations
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt  # Install all requirements
 
   build:
     commands:
