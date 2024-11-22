@@ -1,0 +1,71 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Model - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Machine Learning Model</h1>
+        <p>Click the button below to train the model and view results:</p>
+        <a href="/train"><button>Train and View Results</button></a>
+    </div>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation Results</title>
+</head>
+<body>
+    <h1>Model Evaluation Results</h1>
+    {% for model, results in model_results.items() %}
+        <h2>{{ model }}</h2>
+        <p>Accuracy: {{ results.accuracy }}</p>
+        <pre>{{ results.classification_report }}</pre>
+        {% if model == 'Logistic Regression' %}
+            <h3>Confusion Matrix:</h3>
+            <img src="data:image/png;base64,{{ img_logistic }}" alt="Confusion Matrix for Logistic Regression">
+        {% endif %}
+        {% if model == 'SVM' %}
+            <h3>Confusion Matrix:</h3>
+            <img src="data:image/png;base64,{{ img_svm }}" alt="Confusion Matrix for SVM">
+        {% endif %}
+        {% if model == 'Random Forest' %}
+            <h3>Actual vs Predicted Plot:</h3>
+            <img src="data:image/png;base64,{{ img_rf }}" alt="Actual vs Predicted for Random Forest">
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
