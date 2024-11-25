@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install required Python packages
-RUN pip install flask pandas scikit-learn matplotlib seaborn
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy only the necessary files and folders
 COPY . /app
