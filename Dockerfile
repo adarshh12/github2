@@ -8,9 +8,7 @@ WORKDIR /app
 RUN pip install flask pandas scikit-learn matplotlib seaborn
 
 # Copy only the necessary files and folders
-COPY model.py .
-COPY templates/ ./templates/
-COPY data/ ./data/
+COPY . /app
 
 # Expose the port that the Flask app will run onmm
 EXPOSE 5000
